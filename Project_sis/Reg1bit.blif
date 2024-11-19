@@ -1,0 +1,15 @@
+.model Reg1bit
+
+.inputs A
+.outputs X
+
+# inputs outputs tipo_registro control_ck init_value
+
+# tipo_registro: re - rising edge : fe - falling edge : ah - active high : al - active low : as - asincroni
+# control_ck: NIL - clock del circuito : altre scelte per decretare se si usa il clock del modello o un output generico
+# init_value: 0 e 1 bit : 2 don't care : 3 unknown
+
+.latch A X re NIL 0
+
+.end
+

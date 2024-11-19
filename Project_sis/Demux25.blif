@@ -1,0 +1,14 @@
+.model demux25
+
+.inputs N0 N1 A0 A1 A2 A3 A4
+.outputs X0 X1 X2 X3 X4 Y0 Y1 Y2 Y3 Y4 Z0 Z1 Z2 Z3 Z4 W0 W1 W2 W3 W4
+
+.subckt demux21 S0=N0 S1=N1 A=A0 X=X0 Y=Y0 Z=Z0 W=W0
+.subckt demux21 S0=N0 S1=N1 A=A1 X=X1 Y=Y1 Z=Z1 W=W1
+.subckt demux21 S0=N0 S1=N1 A=A2 X=X2 Y=Y2 Z=Z2 W=W2
+.subckt demux21 S0=N0 S1=N1 A=A3 X=X3 Y=Y3 Z=Z3 W=W3
+.subckt demux21 S0=N0 S1=N1 A=A4 X=X4 Y=Y4 Z=Z4 W=W4
+
+.search Demux21.blif
+
+.end

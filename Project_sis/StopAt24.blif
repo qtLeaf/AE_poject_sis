@@ -1,0 +1,21 @@
+.model StopAt24
+
+.inputs A0 A1 A2 A3 A4 
+.outputs X0 X1 X2 X3 X4
+
+.subckt Const1 CONST1=K0
+.subckt Const1 CONST1=K1
+.subckt Const0 CONST0=K2
+.subckt Const0 CONST0=K3
+.subckt Const0 CONST0=K4
+
+.subckt Mag5bit A0=A0 A1=A1 A2=A2 A3=A3 A4=A4 B0=K0 B1=K1 B2=K2 B3=K3 B4=K4 X=M
+
+.subckt mux15 N=M A0=A0 A1=A1 A2=A2 A3=A3 A4=A4 B0=K0 B1=K1 B2=K2 B3=K3 B4=K4 X0=X0 X1=X1 X2=X2 X3=X3 X4=X4 
+
+.search Const0.blif
+.search Const1.blif
+.search Mag5bit.blif
+.search Mux15.blif
+
+.end

@@ -1,0 +1,17 @@
+.model Eq5bit
+
+.inputs A0 A1 A2 A3 A4 B0 B1 B2 B3 B4
+.outputs U
+
+.subckt Eq1bit A=A0 B=B0 X=J0
+.subckt Eq1bit A=A1 B=B1 X=J1
+.subckt Eq1bit A=A2 B=B2 X=J2
+.subckt Eq1bit A=A3 B=B3 X=J3
+.subckt Eq1bit A=A4 B=B4 X=J4
+
+.names J0 J1 J2 J3 J4 U
+11111 1
+
+.search Eq1bit.blif
+
+.end

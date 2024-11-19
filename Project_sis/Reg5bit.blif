@@ -1,0 +1,14 @@
+.model Reg5bit
+
+.inputs A0 A1 A2 A3 A4
+.outputs X0 X1 X2 X3 X4	
+
+.subckt Reg1bit A=A0 X=X0
+.subckt Reg1bit A=A1 X=X1
+.subckt Reg1bit A=A2 X=X2
+.subckt Reg1bit A=A3 X=X3
+.subckt Reg1bit A=A4 X=X4
+
+.search Reg1bit.blif
+
+.end

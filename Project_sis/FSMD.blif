@@ -1,0 +1,12 @@
+.model FSMD
+
+.inputs Input0 Input1 Input2 Input3 Input4
+.outputs Output0 Output1 Output2 Output3 Output4 Output5
+
+.subckt Controllore CI0=Input0 CI1=Input1 CI2=Input2 CI3=Input3 CI4=Input4 GIORNO0=G0 GIORNO1=G1 NOTTE=NOTTE0 SETT_NON_VALIDO=Output0
+.subckt Datapath I0=Input0 I1=Input1 I2=Input2 I3=Input3 I4=Input4 G0=G0 G1=G1 N=NOTTE0        SBARRA_IN=Output1 SBARRA_OUT=Output2 SECTOR_A=Output3 SECTOR_B=Output4 SECTOR_C=Output5
+
+.search Controllore.blif
+.search Datapath.blif
+
+.end

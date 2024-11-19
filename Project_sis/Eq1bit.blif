@@ -1,0 +1,12 @@
+.model Eq1bit
+
+.inputs A B
+.outputs X
+
+.names A B X
+11 1
+00 1
+
+# corrisponde ad uno XNOR
+
+.end

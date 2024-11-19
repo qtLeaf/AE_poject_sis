@@ -1,0 +1,13 @@
+.model Sum5bit
+.inputs A4 A3 A2 A1 A0 B4 B3 B2 B1 B0 CIN
+.outputs X4 X3 X2 X1 X0 COUT
+
+.subckt Sum1bit A=A0 B=B0 CIN=CIN X=X0 COUT=C0
+.subckt Sum1bit A=A1 B=B1 CIN=C0 X=X1 COUT=C1
+.subckt Sum1bit A=A2 B=B2 CIN=C1 X=X2 COUT=C2
+.subckt Sum1bit A=A3 B=B3 CIN=C2 X=X3 COUT=C3
+.subckt Sum1bit A=A4 B=B4 CIN=C3 X=X4 COUT=COUT
+
+.search Sum1bit.blif
+
+.end

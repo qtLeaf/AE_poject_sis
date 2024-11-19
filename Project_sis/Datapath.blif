@@ -1,0 +1,110 @@
+.model Datapath
+
+.inputs I0 I1 I2 I3 I4 G0 G1 N
+.outputs SBARRA_IN SBARRA_OUT SECTOR_A SECTOR_B SECTOR_C
+
+# dichiarazione nodi 
+
+.subckt Const0 CONST0=CT0	# costante 0
+.subckt Const1 CONST1=CT1	# costante 1
+
+# demultiplexer 
+# uscita: 01 demux, registro A # uscita: 10 demux, registro B # uscita: 11 demux, registro C
+
+.subckt demux25 N0=G0 N1=G1 A0=I0 A1=I1 A2=I2 A3=I3 A4=I4 X0=SP0 X1=SP1 X2=SP2 X3=SP3 X4=SP4 Y0=NodeA0 Y1=NodeA1 Y2=NodeA2 Y3=NodeA3 Y4=NodeA4 Z0=NodeB0 Z1=NodeB1 Z2=NodeB2 Z3=NodeB3 Z4=NodeB4 W0=NodeC0 W1=NodeC1 W2=NodeC2 W3=NodeC3 W4=NodeC4
+
+.subckt mux12 N=N A0=SP0 A1=SP1 B0=CT0 B1=CT0 X0=INOUT_0 X1=INOUT_1
+
+
+# multiplexer
+
+.subckt mux25 N0=G0 N1=G1 A0=RA0 A1=RA1 A2=RA2 A3=RA3 A4=RA4 B0=NodeA0 B1=NodeA1 B2=NodeA2 B3=NodeA3 B4=NodeA4 C0=RA0 C1=RA1 C2=RA2 C3=RA3 C4=RA4 D0=RA0 D1=RA1 D2=RA2 D3=RA3 D4=RA4 X0=NA0 X1=NA1 X2=NA2 X3=NA3 X4=NA4
+.subckt mux25 N0=G0 N1=G1 A0=RB0 A1=RB1 A2=RB2 A3=RB3 A4=RB4 C0=NodeB0 C1=NodeB1 C2=NodeB2 C3=NodeB3 C4=NodeB4 B0=RB0 B1=RB1 B2=RB2 B3=RB3 B4=RB4 D0=RB0 D1=RB1 D2=RB2 D3=RB3 D4=RB4 X0=NB0 X1=NB1 X2=NB2 X3=NB3 X4=NB4
+.subckt mux25 N0=G0 N1=G1 A0=RC0 A1=RC1 A2=RC2 A3=RC3 A4=RC4 D0=NodeC0 D1=NodeC1 D2=NodeC2 D3=NodeC3 D4=NodeC4  C0=RC0 C1=RC1 C2=RC2 C3=RC3 C4=RC4 B0=RC0 B1=RC1 B2=RC2 B3=RC3 B4=RC4 X0=NNC0 X1=NNC1 X2=NNC2 X3=NNC3 X4=NNC4
+
+# controllo output di C che non superi 24
+.subckt StopAt24 A0=NNC0 A1=NNC1 A2=NNC2 A3=NNC3 A4=NNC4 X0=NC0 X1=NC1 X2=NC2 X3=NC3 X4=NC4
+
+# registri uguale a 00000 se compare N
+
+.subckt mux15 N=N A0=NA0 A1=NA1 A2=NA2 A3=NA3 A4=NA4 B0=CT0 B1=CT0 B2=CT0 B3=CT0 B4=CT0 X0=YA0 X1=YA1 X2=YA2 X3=YA3 X4=YA4
+.subckt mux15 N=N A0=NB0 A1=NB1 A2=NB2 A3=NB3 A4=NB4 B0=CT0 B1=CT0 B2=CT0 B3=CT0 B4=CT0 X0=YB0 X1=YB1 X2=YB2 X3=YB3 X4=YB4
+.subckt mux15 N=N A0=NC0 A1=NC1 A2=NC2 A3=NC3 A4=NC4 B0=CT0 B1=CT0 B2=CT0 B3=CT0 B4=CT0 X0=YC0 X1=YC1 X2=YC2 X3=YC3 X4=YC4
+
+# aggiorno i valori dei registri in base a come si muovono le sbarre
+
+.subckt Calcolatore FULL0=SBA0 FULL1=SBA1 A0=YA0 A1=YA1 A2=YA2 A3=YA3 A4=YA4 X0=QA0 X1=QA1 X2=QA2 X3=QA3 X4=QA4
+.subckt Calcolatore FULL0=SBB0 FULL1=SBB1 A0=YB0 A1=YB1 A2=YB2 A3=YB3 A4=YB4 X0=QB0 X1=QB1 X2=QB2 X3=QB3 X4=QB4
+.subckt Calcolatore FULL0=SBC0 FULL1=SBC1 A0=YC0 A1=YC1 A2=YC2 A3=YC3 A4=YC4 X0=QC0 X1=QC1 X2=QC2 X3=QC3 X4=QC4
+
+# salvo i valori nei registri
+
+.subckt Reg5bit A0=QA0 A1=QA1 A2=QA2 A3=QA3 A4=QA4 X0=RA0 X1=RA1 X2=RA2 X3=RA3 X4=RA4
+.subckt Reg5bit A0=QB0 A1=QB1 A2=QB2 A3=QB3 A4=QB4 X0=RB0 X1=RB1 X2=RB2 X3=RB3 X4=RB4
+.subckt Reg5bit A0=QC0 A1=QC1 A2=QC2 A3=QC3 A4=QC4 X0=RC0 X1=RC1 X2=RC2 X3=RC3 X4=RC4
+
+# confronto con 31 (11111) per A e B, con 24 (11000) per C
+
+.subckt Eq5bit A0=QA0 A1=QA1 A2=QA2 A3=QA3 A4=QA4 B0=CT1 B1=CT1 B2=CT1 B3=CT1 B4=CT1 U=RPA
+.subckt Eq5bit A0=QB0 A1=QB1 A2=QB2 A3=QB3 A4=QB4 B0=CT1 B1=CT1 B2=CT1 B3=CT1 B4=CT1 U=RPB
+.subckt Eq5bit A0=QC0 A1=QC1 A2=QC2 A3=QC3 A4=QC4 B0=CT1 B1=CT1 B2=CT0 B3=CT0 B4=CT0 U=RPC
+
+# confronto con 0 (00000) per tutti e 3, se sono vuoti varrà 1
+
+.subckt Eq5bit A0=QA0 A1=QA1 A2=QA2 A3=QA3 A4=QA4 B0=CT0 B1=CT0 B2=CT0 B3=CT0 B4=CT0 U=RVA
+.subckt Eq5bit A0=QB0 A1=QB1 A2=QB2 A3=QB3 A4=QB4 B0=CT0 B1=CT0 B2=CT0 B3=CT0 B4=CT0 U=RVB
+.subckt Eq5bit A0=QC0 A1=QC1 A2=QC2 A3=QC3 A4=QC4 B0=CT0 B1=CT0 B2=CT0 B3=CT0 B4=CT0 U=RVC
+
+
+.names RPA SECTOR_A 
+1 1
+.names RPB SECTOR_B
+1 1
+.names RPC SECTOR_C
+1 1
+
+# salvataggio del valore SECTOR (pieno)
+
+.latch RPA PA re NIL 0
+.latch RPB PB re NIL 0
+.latch RPC PC re NIL 0
+
+# salvataggio del valore SECTOR (vuoto)
+
+.latch RVA VA re NIL 0
+.latch RVB VB re NIL 0
+.latch RVC VC re NIL 0
+
+# materiale utile a sapere se una sbarra, In o Out, può aprirsi 
+
+.subckt SbarraA FULL_A=PA EMPTY_A=VA INOUT0=INOUT_0 INOUT1=INOUT_1 SECTOR_A=SP2 SECTOR_B=SP3 SECTOR_C=SP4 SBARRA_A0=SBA0 SBARRA_A1=SBA1
+.subckt SbarraB FULL_B=PB EMPTY_B=VB INOUT0=INOUT_0 INOUT1=INOUT_1 SECTOR_A=SP2 SECTOR_B=SP3 SECTOR_C=SP4 SBARRA_B0=SBB0 SBARRA_B1=SBB1
+.subckt SbarraC FULL_C=PC EMPTY_C=VC INOUT0=INOUT_0 INOUT1=INOUT_1 SECTOR_A=SP2 SECTOR_B=SP3 SECTOR_C=SP4 SBARRA_C0=SBC0 SBARRA_C1=SBC1
+
+# solo un settore alla volta può alzarla in quel ciclo clock
+# mettiamo un OR a 3 ingressi da 2 bit ciascuno così inseriamo i bit delle sbarre dei tre settori 
+
+.subckt Or32 A0=SBA0 A1=SBA1 B0=SBB0 B1=SBB1 C0=SBC0 C1=SBC1 X0=SB_IN_WAIT X1=SB_OUT_WAIT
+
+# multiplexer
+# se non è N (notte) lascia passare SBARRA_IN/OUT[2]
+
+.subckt mux12 N=N A0=SB_IN_WAIT A1=SB_OUT_WAIT B0=CT1 B1=CT1 X0=SBARRA_IN X1=SBARRA_OUT
+
+.search Demux25.blif
+.search Mux12.blif
+.search Const0.blif
+.search Const1.blif
+.search Mux25.blif
+.search StopAt24.blif
+.search Calcolatore.blif
+.search Mux15.blif
+.search Reg5bit.blif
+.search Eq5bit.blif
+.search SbarraA.blif
+.search SbarraB.blif
+.search SbarraC.blif
+.search Or32.blif
+
+.end
+

@@ -1,0 +1,37 @@
+.model FSM
+
+.inputs J0 J1 J2 J3 J4
+.outputs FASE0 FASE1 NOTTE SETT_NON_VALIDO
+
+.start_kiss
+
+.i 5
+.o 4
+.s 5
+.p 18
+.r Start
+
+11111 Start InsA 0000
+0---- Start Start 0010
+-0--- Start Start 0010
+--0-- Start Start 0010
+---0- Start Start 0010
+----0 Start Start 0010
+
+----- InsA InsB 0100
+----- InsB InsC 1000
+----- InsC Utente 1100
+
+--100 Utente Utente 0000
+--010 Utente Utente 0000
+--001 Utente Utente 0000
+--11- Utente Utente 0001
+--1-1 Utente Utente 0001
+---11 Utente Utente 0001
+01000 Utente Utente 0001
+1-000 Utente Utente 0001
+00000 Utente Start 0010
+
+.end_kiss
+
+.end 

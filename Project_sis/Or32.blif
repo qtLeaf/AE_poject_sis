@@ -1,0 +1,16 @@
+.model Or32
+
+.inputs A0 A1 B0 B1 C0 C1
+.outputs X0 X1
+
+.names A0 B0 C0 X0
+1-- 1
+-1- 1
+--1 1
+
+.names A1 B1 C1 X1
+1-- 1
+-1- 1
+--1 1
+
+.end

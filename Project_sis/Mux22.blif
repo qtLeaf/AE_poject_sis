@@ -1,0 +1,11 @@
+.model mux22
+
+.inputs N0 N1 A0 A1 B0 B1 C0 C1 D0 D1
+.outputs X0 X1 
+
+.subckt mux21 S0=N0 S1=N1 A=A0 B=B0 C=C0 D=D0 X=X0
+.subckt mux21 S0=N0 S1=N1 A=A1 B=B1 C=C1 D=D1 X=X1
+
+.search Mux21.blif
+
+.end

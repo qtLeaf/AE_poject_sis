@@ -1,0 +1,14 @@
+.model mux15
+
+.inputs N A0 A1 A2 A3 A4 B0 B1 B2 B3 B4
+.outputs X0 X1 X2 X3 X4
+
+.subckt mux11 S=N A=A0 B=B0 X=X0
+.subckt mux11 S=N A=A1 B=B1 X=X1
+.subckt mux11 S=N A=A2 B=B2 X=X2
+.subckt mux11 S=N A=A3 B=B3 X=X3
+.subckt mux11 S=N A=A4 B=B4 X=X4
+
+.search Mux11.blif
+
+.end 

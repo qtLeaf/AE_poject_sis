@@ -1,0 +1,21 @@
+.model SbarraA
+
+.inputs FULL_A EMPTY_A INOUT0 INOUT1 SECTOR_A SECTOR_B SECTOR_C
+.outputs SBARRA_A0 SBARRA_A1
+
+.subckt Const0 CONST0=CT0
+.subckt Const1 CONST1=CT1
+
+.subckt mux12 N=FULL_A A0=CT1 A1=CT0 B0=CT0 B1=CT0 X0=Nodo00 X1=Nodo01
+.subckt mux12 N=EMPTY_A A0=CT0 A1=CT1 B0=CT0 B1=CT0 X0=Nodo10 X1=Nodo11
+
+.subckt mux22 N0=INOUT0 N1=INOUT1 A0=CT0 A1=CT0 B0=Nodo00 B1=Nodo01 C0=Nodo10 C1=Nodo11 D0=CT0 D1=CT0 X0=Nodo20 X1=Nodo21
+.subckt mux32 N0=SECTOR_A N1=SECTOR_B N2=SECTOR_C A0=CT0 A1=CT0 B0=Nodo20 B1=Nodo21 C0=CT0 C1=CT0 D0=CT0 D1=CT0 X0=SBARRA_A0 X1=SBARRA_A1
+
+.search Const0.blif
+.search Const1.blif
+.search Mux12.blif
+.search Mux22.blif
+.search Mux32.blif
+
+.end

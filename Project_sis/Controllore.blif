@@ -1,0 +1,95 @@
+.model Controllore
+.inputs CI0 CI1 CI2 CI3 CI4
+.outputs GIORNO0 GIORNO1 NOTTE SETT_NON_VALIDO
+.latch    [4] LatchOut_v5   0
+.latch    [5] LatchOut_v6   0
+.latch    [6] LatchOut_v7   0
+.start_kiss
+.i 5
+.o 4
+.p 18
+.s 5
+.r Start
+11111 Start InsA 0000
+0---- Start Start 0010
+-0--- Start Start 0010
+--0-- Start Start 0010
+---0- Start Start 0010
+----0 Start Start 0010
+----- InsA InsB 0100
+----- InsB InsC 1000
+----- InsC Giorno 1100
+--100 Giorno Giorno 0000
+--010 Giorno Giorno 0000
+--001 Giorno Giorno 0000
+--11- Giorno Giorno 0001
+--1-1 Giorno Giorno 0001
+---11 Giorno Giorno 0001
+01000 Giorno Giorno 0001
+1-000 Giorno Giorno 0001
+00000 Giorno Start 0010
+.end_kiss
+.latch_order LatchOut_v5 LatchOut_v6 LatchOut_v7
+.code Start 000
+.code InsA 001
+.code InsB 110
+.code InsC 101
+.code Giorno 010
+.names LatchOut_v5 LatchOut_v7 [4]
+01 1
+10 1
+.names CI0 CI1 CI2 CI3 CI4 LatchOut_v5 LatchOut_v6 LatchOut_v7 [5]
+-----1-1 1
+-----0-1 1
+--1--01- 1
+---1-01- 1
+----101- 1
+1-00001- 1
+-100001- 1
+.names CI0 CI1 CI2 CI3 CI4 LatchOut_v5 LatchOut_v6 LatchOut_v7 [6]
+-----1-0 1
+11111-00 1
+.names LatchOut_v5 LatchOut_v7 GIORNO0
+11 1
+10 1
+.names LatchOut_v5 LatchOut_v7 GIORNO1
+11 1
+01 1
+.names CI0 CI1 CI2 CI3 CI4 LatchOut_v5 LatchOut_v6 LatchOut_v7 NOTTE
+0-----00 1
+-0----00 1
+--0---00 1
+---0--00 1
+----0-00 1
+000000-0 1
+.names CI0 CI1 CI2 CI3 CI4 LatchOut_v5 LatchOut_v6 SETT_NON_VALIDO
+--11-01 1
+--1-101 1
+---1101 1
+1-00001 1
+-100001 1
+.exdc 
+.inputs CI0 CI1 CI2 CI3 CI4 LatchOut_v5 LatchOut_v6 LatchOut_v7
+.outputs [4] [5] [6] GIORNO0 GIORNO1 NOTTE SETT_NON_VALIDO
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 [4]
+-11 1
+100 1
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 [5]
+-11 1
+100 1
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 [6]
+-11 1
+100 1
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 GIORNO0
+-11 1
+100 1
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 GIORNO1
+-11 1
+100 1
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 NOTTE
+-11 1
+100 1
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 SETT_NON_VALIDO
+-11 1
+100 1
+.end

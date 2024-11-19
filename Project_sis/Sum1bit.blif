@@ -1,0 +1,17 @@
+.model Sum1bit
+.inputs A B CIN
+.outputs X COUT
+
+.names A B CIN X
+001 1
+010 1
+100 1
+111 1
+
+.names A B CIN COUT 
+011 1
+101 1
+110 1
+111 1
+
+.end

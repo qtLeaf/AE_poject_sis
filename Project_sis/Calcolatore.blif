@@ -1,0 +1,21 @@
+.model Calcolatore
+
+# se la sbarra si apre in uscita, toglie 1 al valore, se si apre in entrata
+# aggiunge 1 al valore. Se nessuna sbarra si apre, il valore è inalterato
+
+.inputs FULL0 FULL1 A0 A1 A2 A3 A4
+.outputs X0 X1 X2 X3 X4
+
+.subckt Const0 CONST0=CT0 
+.subckt Const1 CONST1=CT1
+
+.subckt Sum5bit A4=A0 A3=A1 A2=A2 A1=A3 A0=A4 B4=CT0 B3=CT0 B2=CT0 B1=CT0 B0=CT1 X4=S0 X3=S1 X2=S2 X1=S3 X0=S4 COUT=COUT1 CIN=CT0
+.subckt Sub5bit A4=A0 A3=A1 A2=A2 A1=A3 A0=A4 B4=CT0 B3=CT0 B2=CT0 B1=CT0 B0=CT1 X4=T0 X3=T1 X2=T2 X1=T3 X0=T4 COUT=COUT2
+
+.subckt mux25 N0=FULL0 N1=FULL1 A0=A0 A1=A1 A2=A2 A3=A3 A4=A4 B0=T0 B1=T1 B2=T2 B3=T3 B4=T4 C0=S0 C1=S1 C2=S2 C3=S3 C4=S4 D0=A0 D1=A1 D2=A2 D3=A3 D4=A4 X0=X0 X1=X1 X2=X2 X3=X3 X4=X4
+ 
+.search Mux25.blif
+.search Sum5bit.blif
+.search Sub5bit.blif
+.search Const0.blif
+.search Const1.blif

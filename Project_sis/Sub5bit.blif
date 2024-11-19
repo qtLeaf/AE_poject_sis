@@ -1,0 +1,37 @@
+.model Sub5bit
+
+# la sottrazione posso vederla come la somma del primo
+# input al secondo input convertito in complemento a 2
+
+# 11101 - 11001 = 00100
+# 11101 + (00110 + 1) = 11101 + 00111 = 00100
+
+.inputs A4 A3 A2 A1 A0 B4 B3 B2 B1 B0
+.outputs X4 X3 X2 X1 X0 COUT
+
+.names B4 K4
+0 1
+
+.names B3 K3
+0 1
+
+.names B2 K2
+0 1
+
+.names B1 K1
+0 1
+
+.names B0 K0
+0 1
+
+# approfitto del sommatore, mettendo CIN a 1, quindi 
+# sommandogli come giusto che sia nel complemento a 2,
+# così evitando di dover usare 2 sommatori
+
+.subckt Const1 CONST1=ONE
+.subckt Sum5bit A4=A4 A3=A3 A2=A2 A1=A1 A0=A0 B4=K4 B3=K3 B2=K2 B1=K1 B0=K0 CIN=ONE X4=X4 X3=X3 X2=X2 X1=X1 X0=X0 COUT=COUT
+
+.search Const1.blif
+.search Sum5bit.blif
+
+.end 

@@ -1,0 +1,15 @@
+#il multiplexer è a 4 ingressi, ognuno da un bit. Avendo 4 porte da gestire
+#ho bisogno di 3 bit per il mio discriminante 000 - Ingresso 1 / 001 - Ingresso 2
+#e cosi via. Questa sarà l'unità fondamentale per un mux a + bit in ingresso
+
+.model mux31
+.inputs S0 S1 S2 A B C D
+.outputs X
+
+.names S0 S1 S2 A B C D X
+0001--- 1
+100-1-- 1
+010--1- 1
+001---1 1
+
+.end

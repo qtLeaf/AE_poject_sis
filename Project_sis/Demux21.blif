@@ -1,0 +1,18 @@
+.model demux21
+
+.inputs S0 S1 A
+.outputs X Y Z W
+
+.names S0 S1 A X 
+001 1
+
+.names S0 S1 A Y
+011 1
+
+.names S0 S1 A Z
+101 1
+
+.names S0 S1 A W
+111 1
+
+.end
